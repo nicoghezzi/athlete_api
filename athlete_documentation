@@ -1,0 +1,148 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Athlete API",
+    "description": "Athlete REST API Design",
+    "contact": {
+      "name": "Athlete API created by Nico",
+      "url": "https://www.linkedin.com/in/nghezzi/"
+    },
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://devathlete.com"
+    },
+    {
+      "url": "http://prodatlete.com"
+    }
+  ],
+  "paths": {
+    "/athlete": {
+      "description": "Athlete Resource",
+      "get": {
+        "200": {
+          "description": "Success Response",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/athletes"
+              }
+            }
+          }
+        },
+        "description": "Operation to Fetch Athlete",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "athletename",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "Alex"
+            }
+          }
+        ],
+        "responses": ""
+      },
+      "post": {
+        "description": "Add a New Athlete",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": "",
+              "$ref": "#/components/schemas/athlete"
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Athlete Successfully Added"
+          }
+        }
+      }
+    },
+    "/athlete{id}": {
+      "description": "Get Athlete based on Path Parameter",
+      "get": {
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success Response with Path Param",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array"
+                }
+              },
+              "items": {
+                "properties": {
+                  "AthleteId": {
+                    "type": "integer",
+                    "example": 3
+                  },
+                  "AthleteName": {
+                    "type": "string",
+                    "example": "Alex"
+                  },
+                  "AthleteCategory": {
+                    "type": "string",
+                    "example": "Advanced"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "athlete": {
+        "type": "object",
+        "properties": {
+          "AthleteId": {
+            "type": "integer",
+            "example": 3
+          },
+          "AthleteName": {
+            "type": "string",
+            "example": "Alex"
+          },
+          "AthleteCategory": {
+            "type": "string",
+            "example": "Advanced"
+          }
+        }
+      },
+      "athletes": {
+        "type": "array",
+        "items": {
+          "properties": "",
+          "AthleteId": {
+            "type": "integer",
+            "example": 3
+          },
+          "AthleteName": {
+            "type": "string",
+            "example": "Alex"
+          },
+          "AthleteCategory": {
+            "type": "string",
+            "example": "Advanced"
+          }
+        }
+      }
+    }
+  }
+}
